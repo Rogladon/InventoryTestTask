@@ -19,6 +19,8 @@ public class Thing : InteractiveObject {
 		HoverOut();
 		if (!b && isUsable) {
 			used = true;
+			foreach (var i in GetComponentsInChildren<Collider>())
+				i.gameObject.layer = 2;
 		}
 	}
 
@@ -34,6 +36,8 @@ public class Thing : InteractiveObject {
 
 	public override void MouseUp(bool b, InteractiveObject obj = null) {
 		used = false;
+		foreach (var i in GetComponentsInChildren<Collider>())
+			i.gameObject.layer = 0;
 	}
 
 	void Hover() {
