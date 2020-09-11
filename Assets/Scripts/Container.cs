@@ -50,11 +50,13 @@ public class Container : InteractiveObject {
 		items.Add(obj);
 		Debug.Log(obj.config.type.ToString());
 		obj.AddInContainer(this, domains[obj.config.type]);
+		ApiManager.events.addObjectInContainer.Invoke(obj.config.id);
 	}
 
 	public void PopObject(InteractiveObject obj) {
 		if (obj == this) return;
 		items.Remove(obj);
 		obj.PopFromContainer(this, domains[obj.config.type]);
+		ApiManager.events.popObjectFromContainer.Invoke(obj.config.id);
 	}
 }
