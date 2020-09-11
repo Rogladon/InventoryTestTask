@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct ConfigObject
-{
-    public enum Type {
-		type1,
-		type2,
-		type3
+public class ConfigObject {
+
+	public ConfigObject(ConfigObject c) {
+		type = c.type;
+		weight = c.weight;
+		name = c.name;
+		id = c.id;
+	}
+
+	public enum Type {
+		sword,
+		mat,
+		axe
 	}
 	public Type type;
 	public string name;
@@ -16,4 +23,6 @@ public struct ConfigObject
 	public int weight;
 	public Container container { get; set; }
 	public InteractiveObject obj { get; set; }
+
+	
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Container : InteractiveObject {
 	[SerializeField]
 	private GameObject point;
-	private List<InteractiveObject> items;
+	private List<InteractiveObject> items = new List<InteractiveObject>();
 	
 	Dictionary<ConfigObject.Type, Transform> domains {
 		get {
@@ -46,20 +46,15 @@ public class Container : InteractiveObject {
 	}
 	public void AddObject(InteractiveObject obj) {
 		if (obj == this) return;
+		Debug.Log(obj.name);
 		items.Add(obj);
-		obj.config.container = this;
-		obj.Usable(false);
-		obj.OffRigidbody();
-		SwipeObject swipeObject = obj.gameObject.AddComponent<SwipeObject>();
-		swipeObject.Init(domains[obj.config.type].position, domains[obj.config.type].rotation, 0.5f);
+		Debug.Log(obj.config.type.ToString());
+		obj.AddInContainer(this, domains[obj.config.type]);
 	}
 
 	public void PopObject(InteractiveObject obj) {
 		if (obj == this) return;
 		items.Remove(obj);
-		obj.config.container = null;
-		obj.Usable(true);
-		obj.OnRigidbody();
-		obj.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1, 1), 1, 2) * 100);
+		obj.PopFromContainer(this, domains[obj.config.type]);
 	}
 }

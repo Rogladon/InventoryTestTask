@@ -28,11 +28,11 @@ public class SwipeObject : MonoBehaviour
 			rigid.useGravity = false;
 		}
 		bool destroy = true;
-		if(Vector3.Distance(transform.rotation.eulerAngles, targetRotation.eulerAngles) > 0.2f) {
+		if(Vector3.Distance(transform.rotation.eulerAngles, targetRotation.eulerAngles) > 0.01f) {
 			transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, tLerp);
 			destroy = false;
 		} 
-		if(Vector3.Distance(transform.position, targetPosition) > 0.2f) {
+		if(Vector3.Distance(transform.position, targetPosition) > 0.01f) {
 			transform.position = Vector3.Lerp(transform.position, targetPosition, tLerp);
 			destroy = false;
 		}

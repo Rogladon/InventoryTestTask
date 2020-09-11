@@ -18,6 +18,7 @@ public class InputController : MonoBehaviour
     {
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         if(Physics.Raycast(ray,out hit)) {
 			if (interactive) {
 				if (hit.transform != interactive.transform) {

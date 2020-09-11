@@ -7,8 +7,6 @@ public abstract class InteractiveObject : MonoBehaviour
 {
     public bool used { get; protected set; }
 	public bool isUsable { get; protected set; } = true;
-	[Header("ConfigObject")]
-	[SerializeField]
 	public ConfigObject config;
 
 	private void Start() {
@@ -34,5 +32,20 @@ public abstract class InteractiveObject : MonoBehaviour
 		if (TryGetComponent(out rigid)) {
 			rigid.isKinematic = true;
 		}
+	}
+	public void AddInContainer(Container container, Transform domain) {
+		config.container = container;
+		Usable(false);
+		OffRigidbody();
+		transform.SetParent(domain);
+		SwipeObject swipeObject = gameObject.AddComponent<SwipeObject>();
+		swipeObject.Init(domain.position, domain.rotation, 0.5f);
+	}
+	public void PopFromContainer(Container container, Transform domain) {
+		config.container = null;
+		transform.parent = null;
+		Usable(true);
+		OnRigidbody();
+		GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1, 1), 1, -2) * 100);
 	}
 }

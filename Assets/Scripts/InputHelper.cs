@@ -19,7 +19,8 @@ public class InputHelper : MonoBehaviour
 		get {
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if(Physics.Raycast(ray, out hit)) {
+			if(Physics.Raycast(ray, out hit, (1<<8))) {
+				Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
 				_mousePos = hit.point;
 				return hit.point;
 			}
