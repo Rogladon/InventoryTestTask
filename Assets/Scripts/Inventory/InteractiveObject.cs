@@ -39,7 +39,7 @@ public abstract class InteractiveObject : MonoBehaviour
 		OffRigidbody();
 		transform.SetParent(domain);
 		SwipeObject swipeObject = gameObject.AddComponent<SwipeObject>();
-		swipeObject.Init(domain.position, domain.rotation, 0.5f);
+		swipeObject.Init(domain.position, domain.rotation, 0.3f);
 	}
 	public void PopFromContainer(Container container, Transform domain) {
 		config.container = null;
