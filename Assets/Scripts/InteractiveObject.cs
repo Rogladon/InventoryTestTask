@@ -7,7 +7,7 @@ public abstract class InteractiveObject : MonoBehaviour
 {
     public bool used { get; protected set; }
 	public bool isUsable { get; protected set; } = true;
-
+	[Header("ConfigObject")]
 	[SerializeField]
 	public ConfigObject config;
 
