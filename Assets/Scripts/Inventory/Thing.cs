@@ -12,6 +12,7 @@ public class Thing : InteractiveObject {
 	
 	private void Update() {
 		if (used) {
+			rigid.velocity = new Vector3(rigid.velocity.x, 0, rigid.velocity.z);
 			transform.position = InputHelper.mousePosition + offsetFromMousePosition;
 		}
 	}

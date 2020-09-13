@@ -8,9 +8,15 @@ public abstract class InteractiveObject : MonoBehaviour
     public bool used { get; protected set; }
 	public bool isUsable { get; protected set; } = true;
 	public ConfigObject config;
+	protected Rigidbody rigid;
 
 	private void Start() {
 		config.obj = this;
+		if (!TryGetComponent(out rigid)) {
+			rigid = gameObject.AddComponent<Rigidbody>();
+			rigid.mass = config.weight;
+			rigid.drag = 1;
+		}
 	}
 
 	public abstract void MouseEnter(bool b);
@@ -22,14 +28,12 @@ public abstract class InteractiveObject : MonoBehaviour
 		isUsable = b;
 	}
 	public void OnRigidbody() {
-		Rigidbody rigid;
-		if (TryGetComponent(out rigid)) {
+		if (rigid) {
 			rigid.isKinematic = false;
 		}
 	}
 	public void OffRigidbody() {
-		Rigidbody rigid;
-		if (TryGetComponent(out rigid)) {
+		if (rigid) {
 			rigid.isKinematic = true;
 		}
 	}
@@ -46,6 +50,6 @@ public abstract class InteractiveObject : MonoBehaviour
 		transform.parent = null;
 		Usable(true);
 		OnRigidbody();
-		GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1, 1), 1, -2) * 100);
+		rigid.AddForce(new Vector3(Random.Range(-1, 1), 1, -2) * 100);
 	}
 }
