@@ -30,29 +30,25 @@ public class ApiManager : MonoBehaviour {
 		events.addObjectInContainer.AddListener((int id) => {
 			StartCoroutine(POST(id, "AddObject"));
 		});
-		events.addObjectInContainer.AddListener((int id) => {
+		events.popObjectFromContainer.AddListener((int id) => {
 			StartCoroutine(POST(id, "RemoveObject"));
 		});
 	}
 
 	IEnumerator POST(int id, string typeEvent) {
 		List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-		formData.Add(new MultipartFormDataSection("auth", "BMeHG5xqJeB4qCjpuJCTQLsqNGaqkfB6"));
 		formData.Add(new MultipartFormDataSection("typeEvent", typeEvent));
 		formData.Add(new MultipartFormDataSection("id", id.ToString()));
 
-		string sentData = JsonUtility.ToJson(new Request { type = typeEvent, id = id });
 
-		var request = new UnityWebRequest("https://dev3r02.elysium.today/inventory/status", UnityWebRequest.kHttpVerbPOST) {
-			uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(sentData))
-		};
+		var request = UnityWebRequest.Post("https://dev3r02.elysium.today/inventory/status", formData);
 		request.SetRequestHeader("auth", "BMeHG5xqJeB4qCjpuJCTQLsqNGaqkfB6");
 		yield return request.SendWebRequest();
 
 		if (request.isNetworkError || request.isHttpError) {
 			Debug.Log(request.error);
 		} else {
-			Debug.Log("Form upload complete!");
+			Debug.Log("Response: " + request.downloadHandler.text);
 		}
 	}
 }

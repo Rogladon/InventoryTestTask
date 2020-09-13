@@ -46,9 +46,7 @@ public class Container : InteractiveObject {
 	}
 	public void AddObject(InteractiveObject obj) {
 		if (obj == this) return;
-		Debug.Log(obj.name);
 		items.Add(obj);
-		Debug.Log(obj.config.type.ToString());
 		obj.AddInContainer(this, domains[obj.config.type]);
 		ApiManager.events.addObjectInContainer.Invoke(obj.config.id);
 	}

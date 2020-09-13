@@ -2385,15 +2385,20 @@ PrefabInstance:
       propertyPath: config.name
       value: "\u0422\u043E\u043F\u043E\u0440"
       objectReference: {fileID: 0}
+    - target: {fileID: 5095896047217451274, guid: 64e06d695c630854ab59f5665f035a9f,
+        type: 3}
+      propertyPath: config.weight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9090275077851748486, guid: 64e06d695c630854ab59f5665f035a9f,
         type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9090275077851748486, guid: 64e06d695c630854ab59f5665f035a9f,
         type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9090275077851748486, guid: 64e06d695c630854ab59f5665f035a9f,
         type: 3}
